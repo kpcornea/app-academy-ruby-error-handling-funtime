@@ -1,11 +1,8 @@
 # PHASE 2
 def convert_to_int(str)
-  begin
-    Integer(str)
-  rescue
-    # "you can't convert that.."
-    nil
-  end
+  Integer(str)
+rescue ArgumentError
+  nil
 end
 
 # PHASE 3
