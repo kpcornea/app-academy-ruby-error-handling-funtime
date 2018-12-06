@@ -34,13 +34,23 @@ end
 # PHASE 4
 class BestFriend
   def initialize(name, yrs_known, fav_pastime)
+    if yrs_known < 5
+      raise FriendshipTooShortError.new "really?"
+    end
+    if name.length <= 0
+      raise NotANameError.new "that's not a real name.."
+    end
+    if fav_pastime.length <= 0
+      raise NotAPasttimeError.new "that's not a real pasttime"
+    end
+
     @name = name
     @yrs_known = yrs_known
     @fav_pastime = fav_pastime
   end
 
   def talk_about_friendship
-    puts "Wowza, we've been friends for #{@yrs_known}. Let's be friends for another #{1000 * @yrs_known}."
+    puts "Wowza, we've been friends for #{@yrs_known} years. Let's be friends for another #{1000 * @yrs_known}."
   end
 
   def do_friendstuff
@@ -55,8 +65,11 @@ end
 class CoffeeError < StandardError
 end
 
+class FriendshipTooShortError < StandardError
+end
 
+class NotANameError < StandardError
+end
 
-if __FILE__ == $PROGRAM_NAME
-
+class NotAPasttimeError < StandardError
 end
