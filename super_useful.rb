@@ -11,8 +11,10 @@ FRUITS = ["apple", "banana", "orange"]
 def reaction(maybe_fruit)
   if FRUITS.include? maybe_fruit
     puts "OMG, thanks so much for the #{maybe_fruit}!"
+  elsif maybe_fruit == "coffee"
+    raise CoffeeError.new "mmm coffeeee..."
   else
-    raise StandardError
+    raise StandardError.new "that's not a fruit..."
   end
 end
 
@@ -22,6 +24,11 @@ def feed_me_a_fruit
   puts "Feed me a fruit! (Enter the name of a fruit:)"
   maybe_fruit = gets.chomp
   reaction(maybe_fruit)
+rescue CoffeeError => e
+  puts e.message
+  retry
+rescue StandardError => e
+  puts e.message
 end
 
 # PHASE 4
@@ -44,6 +51,10 @@ class BestFriend
     puts "Hey bestie, I made you a friendship bracelet. It says my name, #{@name}, so you never forget me."
   end
 end
+
+class CoffeeError < StandardError
+end
+
 
 
 if __FILE__ == $PROGRAM_NAME
